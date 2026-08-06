@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Interpreter from "./pages/Interpreter";
+import Dictionary from "./pages/Dictionary";
 
 export default function App() {
   return (
@@ -28,6 +29,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <Interpreter />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dictionary"
+            element={
+              <ProtectedRoute>
+                <Dictionary />
               </ProtectedRoute>
             }
           />
