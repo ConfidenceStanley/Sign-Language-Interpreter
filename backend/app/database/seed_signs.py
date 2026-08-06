@@ -196,112 +196,112 @@ signs = [
         "category": "Greetings",
         "description": "The sign for Hello in American Sign Language.",
         "how_to": "Place your open hand near your forehead with your palm facing outward. Move your hand away from your forehead in a small wave motion.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/h/hello-salut.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/hello.jpg"
     },
     {
         "name": "Thank You",
         "category": "Greetings",
         "description": "The sign for Thank You in American Sign Language.",
         "how_to": "Touch your chin with the fingertips of your flat hand. Move your hand forward and slightly downward away from your face.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/t/thankyou.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/thank-you.jpg"
     },
     {
         "name": "Please",
         "category": "Common Phrases",
         "description": "The sign for Please in American Sign Language.",
         "how_to": "Place your flat open hand on your chest and move it in a circular motion.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/p/please.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/please.jpg"
     },
     {
         "name": "Sorry",
         "category": "Common Phrases",
         "description": "The sign for Sorry in American Sign Language.",
         "how_to": "Make a fist with your dominant hand and place it on your chest. Rub it in a circular motion.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/s/sorry.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/sorry.jpg"
     },
     {
         "name": "Yes",
         "category": "Common Phrases",
         "description": "The sign for Yes in American Sign Language.",
         "how_to": "Make a fist and nod it up and down at the wrist as if your hand is nodding yes.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/y/yes.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/yes.jpg"
     },
     {
         "name": "No",
         "category": "Common Phrases",
         "description": "The sign for No in American Sign Language.",
         "how_to": "Extend your index and middle fingers together. Snap them down to meet your thumb in a quick pinching motion.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/n/no.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/no.jpg"
     },
     {
         "name": "Help",
         "category": "Common Phrases",
         "description": "The sign for Help in American Sign Language.",
         "how_to": "Place your flat non dominant hand palm up. Make a thumbs up with your dominant hand and place it on the open palm. Lift both hands together upward.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/h/help.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/help.jpg"
     },
     {
         "name": "I Love You",
         "category": "Common Phrases",
         "description": "The sign for I Love You in American Sign Language.",
         "how_to": "Extend your thumb, index finger, and pinky finger while keeping your middle and ring fingers down.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/i/iloveyou.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/i-love-you.jpg"
     },
     {
         "name": "Good Morning",
         "category": "Greetings",
         "description": "The sign for Good Morning in American Sign Language.",
         "how_to": "Sign Good by touching your chin with your flat hand and moving it forward. Then sign Morning by raising your dominant forearm like a rising sun.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/g/goodmorning.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/good-morning.jpg"
     },
     {
         "name": "Goodbye",
         "category": "Greetings",
         "description": "The sign for Goodbye in American Sign Language.",
         "how_to": "Open your hand with your palm facing outward. Fold your fingers down and up repeatedly in a waving motion.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/b/bye.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/goodbye.jpg"
     },
     {
         "name": "Water",
         "category": "Common Words",
         "description": "The sign for Water in American Sign Language.",
         "how_to": "Make a W handshape with three fingers extended. Tap the side of your mouth with your index finger twice.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/w/water.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/water.jpg"
     },
     {
         "name": "Food",
         "category": "Common Words",
         "description": "The sign for Food or Eat in American Sign Language.",
         "how_to": "Bring your flattened O hand to your mouth as if putting food in. Tap your lips a couple of times.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/f/food.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/food.jpg"
     },
     {
         "name": "Family",
         "category": "Common Words",
         "description": "The sign for Family in American Sign Language.",
         "how_to": "Make an F handshape with both hands. Move them in a circle away from each other until the pinkies touch.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/f/family.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/family.jpg"
     },
     {
         "name": "Friend",
         "category": "Common Words",
         "description": "The sign for Friend in American Sign Language.",
         "how_to": "Lock your index fingers together with one on top then reverse and lock them with the other on top.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/f/friend.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/friend.jpg"
     },
     {
         "name": "School",
         "category": "Common Words",
         "description": "The sign for School in American Sign Language.",
         "how_to": "Clap your hands together twice as if a teacher is clapping to get attention.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/s/school.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/school.jpg"
     },
     {
         "name": "Home",
         "category": "Common Words",
         "description": "The sign for Home in American Sign Language.",
         "how_to": "Touch the tips of your fingers to the side of your chin then move your hand up near your ear and touch again.",
-        "image_url": "https://www.lifeprint.com/asl101/pages-signs/h/home.gif"
+        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/home.jpg"
     },
 ]
 
