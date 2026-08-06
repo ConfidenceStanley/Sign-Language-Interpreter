@@ -1,0 +1,36 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/app/__pycache__/
+backend/app/routes/__pycache__/
+backend/app/models/__pycache__/
+backend/app/services/__pycache__/
+backend/app/database/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+backend/.env
+frontend/.env
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# ML Models (too large for git)
+backend/app/ml_models/*.h5
+backend/app/ml_models/*.pkl
+backend/app/ml_models/*.tflite
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/

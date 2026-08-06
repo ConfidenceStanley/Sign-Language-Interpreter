@@ -1,0 +1,1252 @@
+# Sign Language Interpretation System - Complete Build Phases
+
+---
+
+## 🛠️ Final Tech Stack Decision
+
+```
+Frontend  : React.js + Tailwind CSS v4
+Backend   : FastAPI (Python)
+Database  : MongoDB
+ML/AI     : MediaPipe + TensorFlow/Keras
+Speech    : Web Speech API (browser-based)
+Realtime  : WebSockets
+Version   : Git (GitHub)
+```
+
+---
+
+## 📁 Project Structure Overview (Before We Start)
+
+```
+sign-language-interpreter/
+│
+├── backend/                  # FastAPI Python Backend
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── routes/
+│   │   ├── models/
+│   │   ├── services/
+│   │   ├── ml_models/
+│   │   └── database/
+│   ├── requirements.txt
+│   └── .env
+│
+├── frontend/                 # React + Tailwind v4
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   └── context/
+│   ├── package.json
+│   └── .env
+│
+├── ml_training/             # Standalone ML training folder
+│   ├── datasets/
+│   ├── notebooks/
+│   └── trained_models/
+│
+├── .gitignore
+└── README.md
+```
+
+---
+
+---
+
+# PHASE 0 - Project Setup & Foundation
+
+> **Goal:** Get everything installed, configured, connected and running with hello world equivalents
+
+---
+
+## PHASE 0.1 - Repository & Project Initialization
+
+### Backend Steps:
+```
+Step 1: Create GitHub repository for the project
+        Git: "chore: initialize project repository with README and gitignore"
+
+Step 2: Create backend folder with Python virtual environment
+        Git: "chore: setup Python virtual environment for FastAPI backend"
+
+Step 3: Install core backend dependencies 
+        (FastAPI, uvicorn, pymongo, python-dotenv, motor)
+        Git: "chore: install and configure core FastAPI dependencies"
+
+Step 4: Create main FastAPI app entry point with a test route (GET /)
+        Git: "feat: create FastAPI app entry point with health check route"
+
+Step 5: Setup .env file for environment variables 
+        (MongoDB URI, app secret, port)
+        Git: "chore: add environment variable configuration with dotenv"
+
+Step 6: Setup folder structure (routes, models, services, database folders)
+        Git: "chore: scaffold backend folder structure for clean architecture"
+```
+
+### Frontend Steps:
+```
+Step 7: Create React app using Vite inside frontend folder
+        Git: "chore: initialize React Vite app for frontend"
+
+Step 8: Install and configure Tailwind CSS v4
+        Git: "chore: install and configure Tailwind CSS v4 in React app"
+
+Step 9: Install additional frontend dependencies
+        (React Router, Axios, React Icons, React Webcam)
+        Git: "chore: install core frontend dependencies and libraries"
+
+Step 10: Clean up default Vite boilerplate files
+         Git: "chore: remove Vite boilerplate and setup clean project structure"
+
+Step 11: Setup folder structure 
+         (components, pages, hooks, services, context folders)
+         Git: "chore: scaffold frontend folder structure for clean architecture"
+
+Step 12: Create base App.jsx with Router and placeholder pages
+         Git: "chore: setup React Router with base routing structure"
+```
+
+---
+
+## PHASE 0.2 - Database Setup
+
+### Backend Steps:
+```
+Step 1: Create MongoDB Atlas account and cluster (cloud database)
+        Git: "chore: setup MongoDB Atlas cluster for cloud database"
+
+Step 2: Create database connection service using Motor 
+        (async MongoDB driver)
+        Git: "feat: create async MongoDB connection service with Motor"
+
+Step 3: Test database connection and confirm it connects on server start
+        Git: "feat: add database connection verification on app startup"
+
+Step 4: Create base database collections 
+        (users, signs, sessions, translations)
+        Git: "feat: define base MongoDB collections and their structure"
+
+Step 5: Create MongoDB schemas/models using Pydantic 
+        (User model, Sign model, Session model)
+        Git: "feat: create Pydantic models for User, Sign and Session data"
+```
+
+---
+
+## PHASE 0.3 - Basic Communication Test (Backend ↔ Frontend)
+
+### Backend Steps:
+```
+Step 1: Create a simple test API route that returns JSON data
+        Git: "feat: add test API route to verify backend is serving data"
+
+Step 2: Configure CORS on FastAPI to allow React frontend to call it
+        Git: "feat: configure CORS middleware for frontend-backend communication"
+```
+
+### Frontend Steps:
+```
+Step 3: Create a simple API service using Axios to call the backend
+        Git: "feat: create Axios API service for backend communication"
+
+Step 4: Display the backend response on a test page in React
+        Git: "feat: create test page to verify frontend-backend data flow"
+
+Step 5: Confirm full stack connection working end to end
+        Git: "test: verify full stack connection frontend to backend to database"
+```
+
+---
+---
+
+# PHASE 1 - Authentication & User Management
+
+> **Goal:** Users can register, login, and have their own profile and preferences
+
+---
+
+## PHASE 1.1 - Backend Authentication
+
+### Backend Steps:
+```
+Step 1: Install authentication dependencies 
+        (python-jose for JWT, passlib for password hashing, bcrypt)
+        Git: "chore: install authentication and security dependencies"
+
+Step 2: Create User MongoDB model with all required fields
+        (name, email, password hash, disability type, preferences, created_at)
+        Git: "feat: create User model with authentication fields in MongoDB"
+
+Step 3: Create password hashing utility service
+        Git: "feat: create password hashing and verification utility service"
+
+Step 4: Create JWT token generation and verification service
+        Git: "feat: create JWT token generation and validation service"
+
+Step 5: Create user registration route (POST /auth/register)
+        - Accept name, email, password, disability_type
+        - Hash password before saving
+        - Return success message
+        Git: "feat: create user registration API route with password hashing"
+
+Step 6: Create user login route (POST /auth/login)
+        - Verify email and password
+        - Return JWT access token
+        Git: "feat: create user login route with JWT token response"
+
+Step 7: Create protected route middleware 
+        (verify JWT token on protected routes)
+        Git: "feat: create JWT authentication middleware for protected routes"
+
+Step 8: Create get current user route (GET /auth/me)
+        - Return logged in users profile data
+        Git: "feat: create get current user profile route with JWT protection"
+
+Step 9: Create update user profile route (PUT /auth/profile)
+        - Allow user to update name, preferences, disability type
+        Git: "feat: create update user profile route for preference management"
+
+Step 10: Test all auth routes using Postman or FastAPI docs
+         Git: "test: verify all authentication routes with manual API testing"
+```
+
+---
+
+## PHASE 1.2 - Frontend Authentication UI
+
+### Frontend Steps:
+```
+Step 1: Create reusable Input component with Tailwind v4 styling
+        Git: "feat: create reusable Input component with Tailwind styling"
+
+Step 2: Create reusable Button component with variants 
+        (primary, secondary, danger)
+        Git: "feat: create reusable Button component with multiple variants"
+
+Step 3: Create reusable Form wrapper component
+        Git: "feat: create reusable Form wrapper component for consistent layout"
+
+Step 4: Create Register page with form 
+        (Name, Email, Password, Disability Type dropdown)
+        Git: "feat: create user registration page with form validation"
+
+Step 5: Create Login page with form (Email, Password)
+        Git: "feat: create user login page with email and password form"
+
+Step 6: Create Auth Context to manage global user/login state
+        Git: "feat: create Auth Context for global authentication state management"
+
+Step 7: Create auth service to call register and login API endpoints
+        Git: "feat: create frontend auth service for register and login API calls"
+
+Step 8: Wire up register form to backend API - 
+        show success or error messages
+        Git: "feat: connect registration form to backend API with feedback"
+
+Step 9: Wire up login form to backend API - 
+        store JWT token in localStorage
+        Git: "feat: connect login form to backend and store JWT token"
+
+Step 10: Create Protected Route component 
+         (redirect to login if not authenticated)
+         Git: "feat: create ProtectedRoute component for authenticated routing"
+
+Step 11: Create Navbar component with login/logout and user name display
+         Git: "feat: create responsive Navbar with auth state display"
+
+Step 12: Create basic Profile page showing user information
+         Git: "feat: create user profile page with account information display"
+
+Step 13: Add logout functionality clearing token and redirecting to login
+         Git: "feat: implement logout functionality with token cleanup"
+```
+
+---
+---
+
+# PHASE 2 - Camera Integration & Hand Detection
+
+> **Goal:** Camera opens, hands are detected, landmarks are drawn live on screen
+
+---
+
+## PHASE 2.1 - Backend Camera & ML Foundation
+
+### Backend Steps:
+```
+Step 1: Install MediaPipe and OpenCV dependencies
+        Git: "chore: install MediaPipe and OpenCV for hand detection processing"
+
+Step 2: Create MediaPipe hand detection service
+        - Initialize MediaPipe Hands solution
+        - Function to process a single frame
+        - Return 21 hand landmarks (x, y, z coordinates)
+        Git: "feat: create MediaPipe hand detection service with landmark extraction"
+
+Step 3: Create WebSocket endpoint in FastAPI (/ws/camera)
+        - Accept video frames from frontend
+        - Process frame through MediaPipe
+        - Return landmarks back to frontend
+        Git: "feat: create WebSocket endpoint for real-time frame processing"
+
+Step 4: Create frame pre-processing utility
+        - Resize frames for faster processing
+        - Convert image formats as needed
+        - Normalize frame data
+        Git: "feat: create frame preprocessing utilities for optimal ML processing"
+
+Step 5: Create landmark data formatter
+        - Format 21 landmarks into clean usable data structure
+        - Separate left hand and right hand data
+        Git: "feat: create landmark data formatter for structured hand data output"
+
+Step 6: Test WebSocket connection and landmark output with dummy frames
+        Git: "test: verify WebSocket frame processing returns correct landmarks"
+```
+
+---
+
+## PHASE 2.2 - Frontend Camera & Hand Visualization
+
+### Frontend Steps:
+```
+Step 1: Create Camera context to manage camera state globally
+        Git: "feat: create Camera context for global camera state management"
+
+Step 2: Create useCamera custom hook
+        - Request camera permission from browser
+        - Start and stop video stream
+        - Handle permission denied errors
+        Git: "feat: create useCamera hook for camera permission and stream control"
+
+Step 3: Create CameraView component
+        - Display live video feed from webcam
+        - Show permission request message if not granted
+        - Handle camera errors gracefully
+        Git: "feat: create CameraView component with live webcam video display"
+
+Step 4: Create Canvas overlay component
+        - Sits on top of video feed
+        - Will be used to draw landmarks and connections
+        Git: "feat: create Canvas overlay component for landmark visualization"
+
+Step 5: Create useWebSocket custom hook
+        - Connect to FastAPI WebSocket endpoint
+        - Send video frames continuously
+        - Receive landmark data back
+        - Handle reconnection on disconnect
+        Git: "feat: create useWebSocket hook for real-time frame streaming"
+
+Step 6: Create frame capture utility
+        - Capture individual frames from video element
+        - Convert frame to base64 or blob for sending
+        - Control capture rate (fps limiting)
+        Git: "feat: create frame capture utility with FPS rate control"
+
+Step 7: Create landmark drawing utility
+        - Draw 21 dots on hand joints on canvas
+        - Draw lines connecting landmarks (hand skeleton)
+        - Color code left and right hands differently
+        Git: "feat: create landmark drawing utility for hand skeleton visualization"
+
+Step 8: Wire everything together on a Camera Test page
+        - Video playing + landmarks drawing on canvas in real time
+        Git: "feat: integrate camera feed with real-time landmark overlay display"
+
+Step 9: Add camera controls (start, stop, switch camera if multiple)
+        Git: "feat: add camera control buttons for start stop and camera switching"
+
+Step 10: Add visual feedback indicators
+         - Green border when hands detected
+         - Yellow when no hands found
+         - Red when camera error
+         Git: "feat: add visual status indicators for hand detection feedback"
+
+Step 11: Create camera permission denied page/message component
+         Git: "feat: create camera permission denied component with user guidance"
+```
+
+---
+---
+
+# PHASE 3 - Sign Language Dataset & ML Model Training
+
+> **Goal:** Train an AI model that can recognize signs from hand landmarks
+
+---
+
+## PHASE 3.1 - Dataset Preparation (Backend/ML)
+
+```
+Step 1: Research and select sign language dataset
+        - ASL Alphabet Dataset (Kaggle)
+        - Custom dataset collection plan
+        Git: "chore: document selected sign language dataset and data sources"
+
+Step 2: Create data collection script
+        - Use MediaPipe to process dataset images
+        - Extract landmarks from each image
+        - Save as structured data (CSV or JSON)
+        Git: "feat: create dataset processing script to extract landmark features"
+
+Step 3: Create data cleaning and validation script
+        - Remove corrupt or unprocessable images
+        - Validate landmark completeness
+        - Check class balance (equal signs per letter)
+        Git: "feat: create data cleaning and validation pipeline for ML dataset"
+
+Step 4: Create data normalization script
+        - Normalize landmark coordinates 
+          (make position-independent)
+        - Scale values between 0 and 1
+        Git: "feat: create landmark normalization for position-independent training"
+
+Step 5: Create train/test/validation data split
+        - 70% training, 20% testing, 10% validation
+        - Save splits as separate files
+        Git: "feat: create dataset splitting into train test and validation sets"
+
+Step 6: Analyze dataset statistics
+        - Count per class, missing data report
+        - Document findings
+        Git: "docs: add dataset analysis report with class distribution statistics"
+```
+
+---
+
+## PHASE 3.2 - ML Model Building & Training
+
+```
+Step 1: Install ML training dependencies
+        (TensorFlow, Keras, NumPy, Pandas, Scikit-learn, Matplotlib)
+        Git: "chore: install TensorFlow Keras and ML training dependencies"
+
+Step 2: Create Jupyter notebook for model experimentation
+        Git: "feat: create ML experimentation notebook for model development"
+
+Step 3: Build static sign classifier model (for letters A-Z)
+        - Input: 63 features (21 landmarks × 3 coordinates)
+        - Hidden layers: Dense neural network
+        - Output: 26 classes (A-Z letters)
+        Git: "feat: build static sign classifier neural network architecture"
+
+Step 4: Train the static classifier model
+        - Run training with training data
+        - Monitor accuracy and loss
+        - Adjust if underfitting or overfitting
+        Git: "feat: train static sign classifier and evaluate performance metrics"
+
+Step 5: Plot training results (accuracy/loss graphs)
+        Git: "feat: generate training accuracy and loss visualization graphs"
+
+Step 6: Test model with unseen test data
+        - Generate confusion matrix
+        - Check per-class accuracy
+        Git: "test: evaluate trained model on test dataset with confusion matrix"
+
+Step 7: Build dynamic sign classifier (for word signs with movement)
+        - Input: Sequence of landmark frames over time
+        - Use LSTM (Long Short-Term Memory) for sequence learning
+        - Output: Common word signs (Hello, Thank you, Yes, No, etc.)
+        Git: "feat: build LSTM model for dynamic movement-based sign recognition"
+
+Step 8: Collect/prepare dynamic sign dataset (video sequences)
+        Git: "feat: prepare sequential frame dataset for dynamic sign training"
+
+Step 9: Train dynamic sign LSTM model
+        Git: "feat: train LSTM dynamic sign classifier with sequence data"
+
+Step 10: Compare static and dynamic model performance
+         Git: "docs: add model comparison report for static and dynamic classifiers"
+
+Step 11: Save best performing models as .h5 or SavedModel format
+         Git: "feat: export trained models to SavedModel format for deployment"
+
+Step 12: Create model performance documentation
+         Git: "docs: document final model architecture and performance benchmarks"
+```
+
+---
+
+## PHASE 3.3 - Integrate Model into Backend
+
+```
+Step 1: Create ML model loader service
+        - Load trained model on server startup
+        - Keep model in memory for fast predictions
+        Git: "feat: create ML model loader service for server startup initialization"
+
+Step 2: Create sign prediction service
+        - Accept landmark data as input
+        - Run prediction through loaded model
+        - Return predicted sign and confidence score
+        Git: "feat: create sign prediction service with confidence score output"
+
+Step 3: Create prediction smoothing utility
+        - Avoid flickering (sign changes too fast)
+        - Use majority vote over last N frames
+        - Only confirm sign when confidence is above threshold
+        Git: "feat: create prediction smoothing to reduce sign detection flickering"
+
+Step 4: Update WebSocket endpoint to include predictions
+        - Send landmarks AND prediction back to frontend
+        Git: "feat: update WebSocket to return both landmarks and sign predictions"
+
+Step 5: Create prediction history tracker
+        - Track sequence of recent signs
+        - Help with word building later
+        Git: "feat: create prediction history tracker for sign sequence building"
+
+Step 6: Test model predictions via WebSocket in real time
+        Git: "test: verify real-time sign predictions through WebSocket endpoint"
+```
+
+---
+---
+
+# PHASE 4 - Sign Recognition & Live Interpretation
+
+> **Goal:** System shows recognized signs live on screen as user signs
+
+---
+
+## PHASE 4.1 - Backend Sign Processing
+
+### Backend Steps:
+```
+Step 1: Create sign buffer service
+        - Collects sequence of detected signs
+        - Groups signs into words
+        - Handles timing between signs and words
+        Git: "feat: create sign buffer service for grouping signs into words"
+
+Step 2: Create sign-to-word builder
+        - Convert sequence of letter signs to words
+        - Handle fingerspelling (letter by letter)
+        Git: "feat: create fingerspelling to word builder service"
+
+Step 3: Create word signs dictionary in MongoDB
+        - Store all supported word-level signs
+        - Each entry has sign name, description, category
+        Git: "feat: create sign dictionary collection with word sign entries"
+
+Step 4: Create sign dictionary API routes
+        - GET /signs - list all supported signs
+        - GET /signs/:id - get single sign detail
+        - GET /signs/category/:name - get signs by category
+        Git: "feat: create sign dictionary API routes for sign data retrieval"
+
+Step 5: Create session tracking service
+        - Start a session when user begins signing
+        - Record all detected signs and translations
+        - End session and save to MongoDB
+        Git: "feat: create session tracking service for translation history"
+
+Step 6: Create sessions API routes
+        - POST /sessions/start - begin new session
+        - POST /sessions/end - end and save session
+        - GET /sessions - get user's past sessions
+        Git: "feat: create session management API routes for history tracking"
+```
+
+---
+
+## PHASE 4.2 - Frontend Live Recognition Display
+
+### Frontend Steps:
+```
+Step 1: Create SignDisplay component
+        - Shows the currently detected sign (large and clear)
+        - Shows confidence percentage
+        - Animates when a new sign is detected
+        Git: "feat: create SignDisplay component with confidence visualization"
+
+Step 2: Create WordBuilder component
+        - Shows letters being spelled out
+        - Highlights current letter being formed
+        - Shows completed words
+        Git: "feat: create WordBuilder component for live fingerspelling display"
+
+Step 3: Create TranslationPanel component
+        - Shows the growing translated sentence
+        - Auto scrolls as more text appears
+        - Formatted like live captions/subtitles
+        Git: "feat: create TranslationPanel component for live sentence display"
+
+Step 4: Create sign detection context
+        - Manage current sign state
+        - Manage current word being built
+        - Manage full translation string
+        Git: "feat: create sign detection context for global interpretation state"
+
+Step 5: Create useSignDetection custom hook
+        - Receive WebSocket prediction data
+        - Apply smoothing logic on frontend
+        - Update sign context state
+        Git: "feat: create useSignDetection hook for prediction state management"
+
+Step 6: Create confidence meter component
+        - Visual bar showing AI confidence level
+        - Changes color (red → yellow → green)
+        Git: "feat: create confidence meter component with color coded visualization"
+
+Step 7: Create sign history strip
+        - Shows last 5-10 detected signs as chips/badges
+        - Allows clicking to remove incorrect sign
+        Git: "feat: create sign history strip for recent detection review"
+
+Step 8: Create main Interpreter page
+        - Camera view (left side)
+        - Translation panel (right side)
+        - All components working together
+        Git: "feat: create main interpreter page with camera and translation layout"
+
+Step 9: Add clear/reset button to clear current translation
+        Git: "feat: add clear button to reset current translation and history"
+
+Step 10: Add copy to clipboard button for translation text
+         Git: "feat: add copy to clipboard functionality for translated text"
+
+Step 11: Wire up session start and end to the interpreter page
+         Git: "feat: integrate session tracking with interpreter page flow"
+```
+
+---
+---
+
+# PHASE 5 - Text-to-Speech & Output Features
+
+> **Goal:** The interpreted text is spoken out loud and displayed clearly
+
+---
+
+## PHASE 5.1 - Backend TTS Support
+
+### Backend Steps:
+```
+Step 1: Create text processing service
+        - Clean and format translated text for speech
+        - Handle punctuation and sentence structure
+        Git: "feat: create text processing service for speech-ready output"
+
+Step 2: Create grammar correction utility
+        - Basic sign language to spoken English grammar
+        - Reorder words where needed
+        - Add articles and conjunctions (a, the, is)
+        Git: "feat: create basic grammar correction for sign to spoken English"
+
+Step 3: Create TTS configuration API route
+        - GET /tts/voices - return available voice options
+        - POST /tts/speak - send text, return speech settings
+        Git: "feat: create TTS configuration API routes for voice settings"
+
+Step 4: Create translation export route
+        - POST /translations/export - return translation as text file
+        Git: "feat: create translation export API route for text download"
+```
+
+---
+
+## PHASE 5.2 - Frontend Speech & Output
+
+### Frontend Steps:
+```
+Step 1: Create useSpeech custom hook using Web Speech API
+        - Text-to-speech functionality
+        - Control voice, rate, pitch, volume
+        - Start, pause, stop speech
+        Git: "feat: create useSpeech hook with Web Speech API integration"
+
+Step 2: Create SpeechControls component
+        - Toggle auto-speak on/off
+        - Speak button (manual trigger)
+        - Volume and speed sliders
+        Git: "feat: create SpeechControls component for TTS configuration"
+
+Step 3: Create voice selector component
+        - List available system voices
+        - Let user pick preferred voice
+        - Save preference in user profile
+        Git: "feat: create voice selector component for speech personalization"
+
+Step 4: Implement auto-speak feature
+        - Automatically speak when a complete word is formed
+        - Or when user pauses signing for X seconds
+        Git: "feat: implement auto-speak trigger on word completion detection"
+
+Step 5: Create OutputPanel component
+        - Large text display (accessible font size)
+        - High contrast mode option
+        - Translation text with speech controls below
+        Git: "feat: create accessible OutputPanel with large text and controls"
+
+Step 6: Create download/export button
+        - Download current translation as .txt file
+        Git: "feat: add translation download functionality as text file export"
+
+Step 7: Add share functionality
+        - Copy shareable link or text to clipboard
+        Git: "feat: add share and clipboard copy for translation output"
+
+Step 8: Create print-friendly translation view
+        Git: "feat: create print-friendly layout for translation output"
+```
+
+---
+---
+
+# PHASE 6 - Sign Dictionary & Learning Features
+
+> **Goal:** Users can browse all supported signs, see how to do them, and learn
+
+---
+
+## PHASE 6.1 - Backend Dictionary API
+
+### Backend Steps:
+```
+Step 1: Populate MongoDB with complete sign dictionary data
+        - All A-Z letter signs with descriptions
+        - Common word signs (50+ words minimum)
+        - Category tags (greetings, numbers, emotions, etc.)
+        Git: "feat: populate sign dictionary with complete ASL alphabet and words"
+
+Step 2: Create advanced sign search route
+        - GET /signs/search?q=hello - search by name or description
+        - Support partial matching
+        Git: "feat: create sign search API with partial match support"
+
+Step 3: Create signs by category route
+        - GET /signs/categories - list all categories
+        - GET /signs/category/:name - signs in a category
+        Git: "feat: create sign category API routes for organized browsing"
+
+Step 4: Create sign statistics route
+        - Which signs are most used by the user
+        - User's most common signs from sessions
+        Git: "feat: create user sign usage statistics API route"
+
+Step 5: Create admin route to add new signs (admin only)
+        - POST /admin/signs - add a new sign entry
+        Git: "feat: create admin route for adding new sign entries to dictionary"
+```
+
+---
+
+## PHASE 6.2 - Frontend Dictionary UI
+
+### Frontend Steps:
+```
+Step 1: Create Dictionary page with grid layout of all signs
+        - Card for each sign showing name and image
+        - Tailwind responsive grid
+        Git: "feat: create sign dictionary page with responsive sign card grid"
+
+Step 2: Create SignCard component
+        - Shows sign name, category, image/illustration
+        - Hover effect showing brief description
+        Git: "feat: create SignCard component with hover preview functionality"
+
+Step 3: Create sign detail modal or page
+        - Full description of the sign
+        - How to perform it (step by step)
+        - Image or animation showing the sign
+        Git: "feat: create sign detail view with instructions and visual guide"
+
+Step 4: Create search bar component for dictionary
+        - Live search filtering as user types
+        Git: "feat: create live search component for sign dictionary filtering"
+
+Step 5: Create category filter tabs/buttons
+        - Filter signs by category (greetings, numbers, etc.)
+        Git: "feat: create category filter tabs for sign dictionary navigation"
+
+Step 6: Create alphabet filter (A-Z quick jump)
+        Git: "feat: create alphabet quick-jump filter for dictionary navigation"
+
+Step 7: Create Practice mode on dictionary
+        - User clicks "Practice this sign"
+        - Camera activates
+        - System tries to detect that specific sign
+        - Gives feedback if done correctly
+        Git: "feat: create practice mode for individual sign learning with feedback"
+
+Step 8: Create progress tracker for practiced signs
+        - Shows which signs user has practiced
+        - Marks signs as learned
+        Git: "feat: create sign practice progress tracker with completion status"
+```
+
+---
+---
+
+# PHASE 7 - History, Sessions & User Dashboard
+
+> **Goal:** Users can see past translations, session history, and their usage stats
+
+---
+
+## PHASE 7.1 - Backend History & Analytics
+
+### Backend Steps:
+```
+Step 1: Create full session recording in MongoDB
+        - Save all signs detected in a session
+        - Save final translations
+        - Save session duration and timestamp
+        Git: "feat: implement complete session recording with MongoDB persistence"
+
+Step 2: Create session history API routes
+        - GET /sessions - paginated list of user sessions
+        - GET /sessions/:id - full detail of one session
+        - DELETE /sessions/:id - delete a session
+        Git: "feat: create session history CRUD API routes with pagination"
+
+Step 3: Create user analytics service
+        - Total sessions count
+        - Total signs interpreted
+        - Most used signs
+        - Activity by day/week
+        Git: "feat: create user analytics service for dashboard statistics"
+
+Step 4: Create analytics API route
+        - GET /analytics/me - return user's stats
+        Git: "feat: create user analytics API route for dashboard data"
+
+Step 5: Create translation search in history
+        - Search through past translations by keyword
+        Git: "feat: create translation history search API with keyword filtering"
+```
+
+---
+
+## PHASE 7.2 - Frontend Dashboard UI
+
+### Frontend Steps:
+```
+Step 1: Create Dashboard page layout with sidebar navigation
+        Git: "feat: create dashboard page with sidebar navigation layout"
+
+Step 2: Create Stats cards component
+        - Total sessions, total words translated, signs learned
+        - Animated number counters
+        Git: "feat: create statistics cards with animated counters for dashboard"
+
+Step 3: Create recent sessions list component
+        - Show last 5 sessions with date and preview text
+        - Click to view full session
+        Git: "feat: create recent sessions list component for dashboard overview"
+
+Step 4: Create Session detail page
+        - Full translation from that session
+        - Timeline of signs detected
+        - Option to replay or export
+        Git: "feat: create session detail page with full translation history"
+
+Step 5: Create activity chart component
+        - Bar chart or line graph of usage over time
+        - Sessions per day this week
+        Git: "feat: create activity chart for weekly usage visualization"
+
+Step 6: Create most used signs chart
+        - Pie chart or bar chart of top signs
+        Git: "feat: create most used signs chart for personal analytics"
+
+Step 7: Create session search with filters
+        - Search by date range or keywords
+        Git: "feat: create session history search with date and keyword filters"
+
+Step 8: Create export all history button
+        - Download all sessions as PDF or text file
+        Git: "feat: add export all history functionality as downloadable file"
+```
+
+---
+---
+
+# PHASE 8 - Accessibility & Settings
+
+> **Goal:** Make the system itself fully accessible and customizable
+
+---
+
+## PHASE 8.1 - Backend Settings
+
+### Backend Steps:
+```
+Step 1: Create user settings model and routes
+        - Font size preference
+        - High contrast mode
+        - Auto speak preference
+        - Preferred voice settings
+        - Sign language type (ASL, BSL etc)
+        Git: "feat: create user settings model and CRUD API routes"
+
+Step 2: Create settings persistence
+        - Save and retrieve settings per user from MongoDB
+        Git: "feat: implement settings persistence with MongoDB user preferences"
+
+Step 3: Create notification preferences route
+        Git: "feat: create notification preference settings API route"
+```
+
+---
+
+## PHASE 8.2 - Frontend Settings & Accessibility UI
+
+### Frontend Steps:
+```
+Step 1: Create Settings page with organized sections
+        (Display, Audio, Camera, Language, Account)
+        Git: "feat: create settings page with organized preference sections"
+
+Step 2: Create display settings section
+        - Font size slider (small, medium, large, extra large)
+        - High contrast toggle
+        - Dark/Light mode toggle
+        Git: "feat: create display settings with font size and contrast controls"
+
+Step 3: Implement global font size context
+        - Changing font size affects whole application
+        Git: "feat: implement global font size context for app-wide adjustment"
+
+Step 4: Implement dark/light mode with Tailwind v4
+        Git: "feat: implement dark and light mode theme switching"
+
+Step 5: Create audio settings section
+        - TTS voice selection
+        - Speech speed and pitch sliders
+        - Volume control
+        - Auto-speak toggle
+        Git: "feat: create audio settings section for TTS personalization"
+
+Step 6: Create camera settings section
+        - Select preferred camera (front/back/external)
+        - Frame rate selection
+        - Mirror video option
+        Git: "feat: create camera settings section for capture preferences"
+
+Step 7: Create language settings section
+        - Select sign language (ASL, BSL, etc.)
+        - Output language selection
+        Git: "feat: create language settings for sign type and output selection"
+
+Step 8: Add keyboard navigation support throughout app
+        - Tab through all interactive elements
+        - Keyboard shortcuts for main actions
+        Git: "feat: add keyboard navigation and shortcut support for accessibility"
+
+Step 9: Add ARIA labels and roles to all components
+        - Screen reader compatibility
+        Git: "feat: add ARIA labels and roles for screen reader compatibility"
+
+Step 10: Create color blind friendly mode
+         Git: "feat: add color blind friendly palette option in display settings"
+```
+
+---
+---
+
+# PHASE 9 - Testing & Quality Assurance
+
+> **Goal:** Everything works correctly, edge cases handled, bugs fixed
+
+---
+
+## PHASE 9.1 - Backend Testing
+
+### Backend Steps:
+```
+Step 1: Install testing dependencies (pytest, httpx for async testing)
+        Git: "chore: install pytest and testing dependencies for backend"
+
+Step 2: Write unit tests for authentication service
+        - Test registration with valid data
+        - Test registration with duplicate email
+        - Test login with correct and wrong password
+        Git: "test: write unit tests for authentication service functions"
+
+Step 3: Write unit tests for sign prediction service
+        - Test with valid landmark data
+        - Test with empty or corrupt data
+        Git: "test: write unit tests for sign prediction service accuracy"
+
+Step 4: Write integration tests for all API routes
+        - Test every route for correct response codes
+        - Test authorization on protected routes
+        Git: "test: write integration tests for all API routes and auth guards"
+
+Step 5: Write WebSocket connection tests
+        - Test connection, disconnection, reconnection
+        - Test frame receiving and response timing
+        Git: "test: write WebSocket endpoint tests for connection reliability"
+
+Step 6: Test database operations
+        - Test CRUD operations for all models
+        Git: "test: write database operation tests for all MongoDB models"
+
+Step 7: Load test the WebSocket endpoint
+        - Simulate multiple users connecting simultaneously
+        Git: "test: perform load testing on WebSocket for concurrent users"
+
+Step 8: Fix all bugs and issues found during testing
+        Git: "fix: resolve bugs identified during backend testing phase"
+```
+
+---
+
+## PHASE 9.2 - Frontend Testing
+
+### Frontend Steps:
+```
+Step 1: Install frontend testing dependencies (Vitest, React Testing Library)
+        Git: "chore: install Vitest and React Testing Library for frontend testing"
+
+Step 2: Write unit tests for custom hooks
+        - useCamera, useWebSocket, useSignDetection, useSpeech
+        Git: "test: write unit tests for all custom React hooks"
+
+Step 3: Write component tests for critical UI components
+        - SignDisplay, TranslationPanel, CameraView
+        Git: "test: write component tests for core interpreter UI components"
+
+Step 4: Write integration tests for auth flow
+        - Register → Login → Access protected page
+        Git: "test: write integration tests for complete authentication user flow"
+
+Step 5: Test camera permission handling
+        - Test allowed, denied, and unavailable states
+        Git: "test: write tests for all camera permission state scenarios"
+
+Step 6: Test on multiple browsers
+        - Chrome, Firefox, Edge, Safari
+        Git: "test: verify cross-browser compatibility across major browsers"
+
+Step 7: Test on mobile devices
+        - Phone and tablet screen sizes
+        - Touch interactions
+        Git: "test: verify mobile responsiveness and touch interaction support"
+
+Step 8: Accessibility audit
+        - Run Lighthouse accessibility checker
+        - Fix all flagged issues
+        Git: "fix: resolve accessibility issues identified in Lighthouse audit"
+
+Step 9: Fix all frontend bugs found during testing
+        Git: "fix: resolve all bugs identified during frontend testing phase"
+```
+
+---
+---
+
+# PHASE 10 - UI/UX Polish & Final Design
+
+> **Goal:** The system looks professional, clean, accessible and presentation ready
+
+---
+
+### Steps:
+```
+Step 1: Create consistent design system
+        - Color palette, typography, spacing in Tailwind config
+        Git: "design: establish consistent design system in Tailwind configuration"
+
+Step 2: Design and build Landing/Home page
+        - Hero section explaining the system
+        - How it works section (3 steps)
+        - Call to action buttons
+        Git: "feat: create landing page with hero section and feature overview"
+
+Step 3: Create About page
+        - Project purpose and story
+        - Team members
+        - Technology used
+        Git: "feat: create about page with project information and team section"
+
+Step 4: Add loading states and skeletons everywhere
+        - Skeleton screens while data loads
+        Git: "feat: add loading skeleton components for all data-fetching states"
+
+Step 5: Add error states and error boundaries
+        - Friendly error messages
+        - Error boundary for crash protection
+        Git: "feat: add error boundaries and user-friendly error state displays"
+
+Step 6: Add empty states (no sessions yet, no history etc.)
+        Git: "feat: add empty state components for sections with no data"
+
+Step 7: Add animations and transitions (Tailwind v4 transitions)
+        - Page transitions
+        - Component mount/unmount animations
+        Git: "feat: add smooth animations and page transition effects"
+
+Step 8: Add toast notifications system
+        - Success, error, warning, info notifications
+        Git: "feat: implement toast notification system for user feedback"
+
+Step 9: Mobile responsive polish for all pages
+        - Test and fix every page on small screens
+        Git: "feat: polish mobile responsiveness across all application pages"
+
+Step 10: Final color, spacing and typography review
+         Git: "design: final typography spacing and color consistency pass"
+```
+
+---
+---
+
+# PHASE 11 - Deployment & Production
+
+> **Goal:** System is live and accessible online for demonstration and use
+
+---
+
+## PHASE 11.1 - Backend Deployment
+
+### Backend Steps:
+```
+Step 1: Prepare backend for production
+        - Set production environment variables
+        - Disable debug mode
+        - Configure production CORS
+        Git: "chore: configure FastAPI backend for production environment"
+
+Step 2: Create Dockerfile for backend
+        Git: "chore: create Dockerfile for backend containerization"
+
+Step 3: Deploy backend to Render or Railway (free tier)
+        Git: "chore: add deployment configuration for Render backend hosting"
+
+Step 4: Configure production MongoDB Atlas connection
+        Git: "chore: configure production MongoDB Atlas database connection"
+
+Step 5: Set up environment variables on hosting platform
+        Git: "chore: document environment variable setup for production deployment"
+
+Step 6: Test all API endpoints on live backend URL
+        Git: "test: verify all API endpoints working on production backend"
+```
+
+---
+
+## PHASE 11.2 - Frontend Deployment
+
+### Frontend Steps:
+```
+Step 1: Configure production environment variables in React
+        - Production API URL
+        - Production WebSocket URL
+        Git: "chore: configure React frontend for production environment variables"
+
+Step 2: Build React app for production (npm run build)
+        Git: "chore: create optimized production build of React frontend"
+
+Step 3: Deploy frontend to Vercel or Netlify
+        Git: "chore: add deployment configuration for Vercel frontend hosting"
+
+Step 4: Configure custom domain if available
+        Git: "chore: configure custom domain for production deployment"
+
+Step 5: Test complete live system end to end
+        - Register, login, sign, interpret, speech, history
+        Git: "test: complete end-to-end testing on production deployment"
+
+Step 6: Fix any production-specific bugs
+        Git: "fix: resolve production environment specific issues"
+
+Step 7: Set up basic monitoring and error logging
+        Git: "chore: setup error monitoring for production application"
+```
+
+---
+---
+
+# PHASE 12 - Documentation & Presentation
+
+> **Goal:** Project is documented well for submission, viva, and future developers
+
+---
+
+### Steps:
+```
+Step 1: Write comprehensive README.md
+        - What the project is
+        - How to set it up locally
+        - How to run frontend and backend
+        - Environment variables needed
+        Git: "docs: write comprehensive README with setup and run instructions"
+
+Step 2: Create API documentation (FastAPI auto-docs already helps here)
+        - Document all routes, request and response formats
+        Git: "docs: complete API documentation for all FastAPI endpoints"
+
+Step 3: Write system architecture document
+        - Diagrams of the full system
+        - Data flow explanations
+        Git: "docs: add system architecture document with data flow diagrams"
+
+Step 4: Write ML model documentation
+        - Dataset used, model architecture, training results
+        - Accuracy scores and confusion matrix
+        Git: "docs: document ML model architecture dataset and performance results"
+
+Step 5: Write user manual
+        - How to use the system step by step
+        - Troubleshooting guide
+        Git: "docs: create user manual with step by step usage instructions"
+
+Step 6: Create project report supporting document (for HND submission)
+        Git: "docs: finalize project report documentation for HND submission"
+
+Step 7: Prepare demo video or slides for presentation
+        Git: "docs: add presentation slides and demo materials to repository"
+
+Step 8: Final code cleanup and comments
+        - Remove console.logs, add meaningful comments
+        Git: "chore: final code cleanup comments and unused import removal"
+
+Step 9: Tag final release version on GitHub
+        Git: "chore: tag v1.0.0 final release for HND project submission"
+```
+
+---
+
+---
+
+# 📊 Complete Phase Summary
+
+| Phase | What We Build | Est. Complexity |
+|-------|--------------|----------------|
+| **Phase 0** | Setup, repo, DB connection, hello world | 🟢 Easy |
+| **Phase 1** | Auth - Register, Login, JWT, Profile | 🟡 Medium |
+| **Phase 2** | Camera + MediaPipe hand landmark detection | 🟡 Medium |
+| **Phase 3** | ML Dataset + Train model + Integrate | 🔴 Hard |
+| **Phase 4** | Live sign recognition display | 🔴 Hard |
+| **Phase 5** | Text-to-Speech output | 🟡 Medium |
+| **Phase 6** | Sign dictionary + Learning/Practice mode | 🟡 Medium |
+| **Phase 7** | Session history + Dashboard + Analytics | 🟡 Medium |
+| **Phase 8** | Accessibility + Settings + Themes | 🟢 Easy |
+| **Phase 9** | Testing frontend and backend | 🟡 Medium |
+| **Phase 10** | UI Polish + Animations + Final design | 🟢 Easy |
+| **Phase 11** | Deployment (Vercel + Render + Atlas) | 🟡 Medium |
+| **Phase 12** | Docs + Presentation + Submission | 🟢 Easy |
+
+---
+
+# ⚡ Recommended Build Order for Team
+
+```
+If you have a team:
+
+Person 1 (Backend Dev):   Phases 0 → 1 → 2 backend → 3 → 4 backend
+Person 2 (Frontend Dev):  Phases 0 → 1 → 2 frontend → 4 frontend → 5
+Person 3 (ML Engineer):   Phase 3 (runs parallel - dataset + training)
+All Together:             Phases 6 → 7 → 8 → 9 → 10 → 11 → 12
+```
+
+---
+
+> **Say the word when you are ready to start Phase 0 and we begin coding! 🚀**
