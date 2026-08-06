@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
+import { FilesetResolver, GestureRecognizer } from "@mediapipe/tasks-vision";
 
 export default function useHandDetection() {
-  const handLandmarkerRef = useRef(null);
+  const recognizerRef = useRef(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -13,17 +13,16 @@ export default function useHandDetection() {
         "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
       );
 
-      const handLandmarker = await HandLandmarker.createFromOptions(vision, {
+      const recognizer = await GestureRecognizer.createFromOptions(vision, {
         baseOptions: {
-          modelAssetPath:
-            "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+          modelAssetPath: "/models/gesture_recognizer.task",
         },
         runningMode: "VIDEO",
         numHands: 2,
       });
 
       if (mounted) {
-        handLandmarkerRef.current = handLandmarker;
+        recognizerRef.current = recognizer;
         setReady(true);
       }
     }
@@ -35,10 +34,10 @@ export default function useHandDetection() {
     };
   }, []);
 
-  const detectHands = (video) => {
-    if (!ready || !video || !handLandmarkerRef.current) return null;
-    return handLandmarkerRef.current.detectForVideo(video, performance.now());
+  const detect = (video) => {
+    if (!ready || !video || !recognizerRef.current) return null;
+    return recognizerRef.current.recognizeForVideo(video, performance.now());
   };
 
-  return { ready, detectHands };
+  return { ready, detect };
 }
