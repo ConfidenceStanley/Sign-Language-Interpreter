@@ -11,8 +11,20 @@ const SignContext = createContext({
   finalizeWord: () => {},
 });
 
-const LETTER_HOLD_FRAMES = 15;
-const WORD_PAUSE_MS = 1500;
+const GESTURE_MAP = {
+  "Thumb_Up": "THUMB UP",
+  "Thumb_Down": "THUMB DOWN",
+  "Open_Palm": "OPEN PALM",
+  "Closed_Fist": "CLOSED FIST",
+  "Victory": "VICTORY",
+  "Pointing_Up": "POINTING UP",
+  "ILoveYou": "I LOVE YOU",
+};
+
+const IGNORED = ["None", "no_gesture", "", null, undefined];
+
+const HOLD_FRAMES = 20;
+const SIGN_COOLDOWN_MS = 1500;
 
 export function SignProvider({ children }) {
   const [currentSign, setCurrentSign] = useState("");
@@ -21,18 +33,22 @@ export function SignProvider({ children }) {
   const [confidence, setConfidence] = useState(0);
 
   const signBuffer = useRef([]);
-  const lastSignTime = useRef(Date.now());
-  const lastWordTime = useRef(Date.now());
-  const wordPauseTimer = useRef(null);
+  const lastConfirmedSign = useRef("");
+  const lastSignTime = useRef(0);
 
-  const pushSign = (sign, score) => {
-    if (!sign || sign === "None" || sign === "no_gesture") return;
+  const pushSign = (rawSign, score) => {
+    if (IGNORED.includes(rawSign)) {
+      setCurrentSign("");
+      setConfidence(0);
+      return;
+    }
 
-    setCurrentSign(sign);
-    setConfidence(Math.round(score * 100));
+    const mappedSign = GESTURE_MAP[rawSign] || rawSign.replace(/_/g, " ");
+    setCurrentSign(mappedSign);
+    setConfidence(Math.round((score || 0) * 100));
 
-    signBuffer.current.push(sign);
-    if (signBuffer.current.length > LETTER_HOLD_FRAMES) {
+    signBuffer.current.push(mappedSign);
+    if (signBuffer.current.length > HOLD_FRAMES) {
       signBuffer.current.shift();
     }
 
@@ -42,33 +58,23 @@ export function SignProvider({ children }) {
     }, {});
 
     const dominant = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-    if (!dominant || dominant[1] < LETTER_HOLD_FRAMES * 0.6) return;
+    if (!dominant || dominant[1] < HOLD_FRAMES * 0.65) return;
 
     const dominantSign = dominant[0];
     const now = Date.now();
 
-    if (now - lastSignTime.current < 800) return;
+    if (
+      dominantSign === lastConfirmedSign.current ||
+      now - lastSignTime.current < SIGN_COOLDOWN_MS
+    ) return;
+
+    lastConfirmedSign.current = dominantSign;
     lastSignTime.current = now;
 
-    if (dominantSign === "space") {
-      finalizeWord();
-    } else {
-      setCurrentWord((prev) => prev + dominantSign);
-      lastWordTime.current = Date.now();
-
-      if (wordPauseTimer.current) clearTimeout(wordPauseTimer.current);
-      wordPauseTimer.current = setTimeout(() => {
-        finalizeWord();
-      }, WORD_PAUSE_MS);
-    }
-  };
-
-  const finalizeWord = () => {
-    setCurrentWord((prev) => {
-      if (prev.trim()) {
-        setSentence((s) => (s ? s + " " + prev : prev));
-      }
-      return "";
+    setSentence((prev) => {
+      const parts = prev ? prev.split(" ") : [];
+      parts.push(dominantSign);
+      return parts.join(" ");
     });
   };
 
@@ -78,14 +84,23 @@ export function SignProvider({ children }) {
     setSentence("");
     setConfidence(0);
     signBuffer.current = [];
+    lastConfirmedSign.current = "";
+    lastSignTime.current = 0;
   };
 
   const removeLastWord = () => {
     setSentence((prev) => {
-      const words = prev.trim().split(" ");
-      words.pop();
-      return words.join(" ");
+      const parts = prev.trim().split(" ");
+      parts.pop();
+      return parts.join(" ");
     });
+  };
+
+  const finalizeWord = () => {
+    if (currentWord.trim()) {
+      setSentence((prev) => (prev ? prev + " " + currentWord : currentWord));
+      setCurrentWord("");
+    }
   };
 
   return (

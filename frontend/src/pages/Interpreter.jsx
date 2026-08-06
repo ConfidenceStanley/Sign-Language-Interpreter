@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Navbar from "../components/layout/Navbar";
 import CameraView from "../components/camera/CameraView";
 import TranslationPanel from "../components/interpreter/TranslationPanel";
@@ -14,9 +14,11 @@ function InterpreterContent() {
   const startTimeRef = useRef(Date.now());
   const signsLogRef = useRef([]);
 
-  if (currentSign && !signsLogRef.current.includes(currentSign)) {
-    signsLogRef.current.push(currentSign);
-  }
+  useEffect(() => {
+    if (currentSign && currentSign !== signsLogRef.current[signsLogRef.current.length - 1]) {
+      signsLogRef.current.push(currentSign);
+    }
+  }, [currentSign]);
 
   const handleSaveSession = async () => {
     if (!sentence.trim()) return;
@@ -25,7 +27,7 @@ function InterpreterContent() {
       const duration = Math.round((Date.now() - startTimeRef.current) / 1000);
       await endSession({
         translation: sentence,
-        signs_detected: signsLogRef.current,
+        signs_detected: [...new Set(signsLogRef.current)],
         duration_seconds: duration,
       });
       setSaved(true);
@@ -48,8 +50,8 @@ function InterpreterContent() {
             </div>
             <h1 className="text-3xl font-bold mb-2">Sign Language Interpreter</h1>
             <p className="text-gray-400 max-w-2xl text-sm">
-              Show your hands to the camera and sign in ASL. The AI model detects
-              your gestures and converts them to text and speech in real time.
+              Show your hands to the camera and perform gestures. Signs are
+              detected and added to your translation automatically.
             </p>
           </div>
 

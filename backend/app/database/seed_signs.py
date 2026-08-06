@@ -245,7 +245,7 @@ signs = [
         "category": "Common Phrases",
         "description": "The sign for I Love You in American Sign Language.",
         "how_to": "Extend your thumb, index finger, and pinky finger while keeping your middle and ring fingers down.",
-        "image_url": "https://media.signbsl.com/videos/asl/startasl/img/i-love-you.jpg"
+        "image_url": "https://media.signbsl.com/videos/asl/youtube/img/dEUvcuoKxsk.jpg"
     },
     {
         "name": "Good Morning",
