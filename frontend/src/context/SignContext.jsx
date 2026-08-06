@@ -1,6 +1,15 @@
 import { createContext, useContext, useRef, useState } from "react";
 
-const SignContext = createContext(null);
+const SignContext = createContext({
+  currentSign: "",
+  currentWord: "",
+  sentence: "",
+  confidence: 0,
+  pushSign: () => {},
+  clearSentence: () => {},
+  removeLastWord: () => {},
+  finalizeWord: () => {},
+});
 
 const LETTER_HOLD_FRAMES = 15;
 const WORD_PAUSE_MS = 1500;
