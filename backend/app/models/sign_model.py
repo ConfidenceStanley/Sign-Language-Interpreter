@@ -14,4 +14,4 @@ class SignResponse(BaseModel):
     category: str
     description: str
     how_to: str
-    image_url: Optional[str] = None
+    image_url: Optional[str] = None 

@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from database.connection import connect_db, close_db
 from routes.auth_routes import router as auth_router
 from routes.sign_routes import router as sign_router
+from routes.session_routes import router as session_router
 
 
 @asynccontextmanager
@@ -26,6 +27,8 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(sign_router)
+app.include_router(session_router)
+
 
 @app.get("/")
 async def health_check():

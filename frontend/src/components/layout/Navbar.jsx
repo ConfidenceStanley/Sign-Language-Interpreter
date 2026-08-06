@@ -8,8 +8,8 @@ const navLinks = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Interpreter", path: "/interpreter" },
   { name: "Dictionary", path: "/dictionary" },
+  { name: "History", path: "/history" },
 ];
-
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
