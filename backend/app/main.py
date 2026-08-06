@@ -2,8 +2,8 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from app.database.connection import connect_db, close_db
-from app.routes.auth_routes import router as auth_router
+from database.connection import connect_db, close_db
+from routes.auth_routes import router as auth_router
 
 
 @asynccontextmanager

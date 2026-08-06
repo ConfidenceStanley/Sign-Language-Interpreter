@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Response, Request
-from app.models.user_model import UserRegister, UserLogin, UserUpdate
-from app.services.auth_service import hash_password, verify_password, create_token, decode_token
-from app.database.connection import get_db
+from models.user_model import UserRegister, UserLogin, UserUpdate
+from services.auth_service import hash_password, verify_password, create_token, decode_token
+from database.connection import get_db
 from bson import ObjectId
 from datetime import datetime
 

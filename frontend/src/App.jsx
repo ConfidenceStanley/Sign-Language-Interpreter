@@ -1,23 +1,27 @@
-import { useEffect, useState } from "react";
-import api from "./services/api";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
-function App() {
-  const [status, setStatus] = useState("");
-
-  useEffect(() => {
-    api.get("/")
-      .then(res => setStatus(res.data.status))
-      .catch(() => setStatus("Backend not reachable"));
-  }, []);
-
+export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold mb-4">
-        Sign Language Interpreter 🚀
-      </h1>
-      <p>{status}</p>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
-
-export default App;
