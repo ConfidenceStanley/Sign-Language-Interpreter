@@ -30,6 +30,13 @@ export default function CameraView() {
           setLandmarks(results.landmarks || []);
           setHandsCount(results.landmarks?.length || 0);
 
+          if (results.landmarks?.length > 0) {
+            const prediction = await predictFromLandmarks(results.landmarks[0]);
+            if (prediction) {
+              pushSign(prediction.sign, prediction.confidence);
+            }
+          }
+
           if (results.gestures?.length > 0) {
             const top = results.gestures[0][0];
             pushSign(top.categoryName, top.score);
