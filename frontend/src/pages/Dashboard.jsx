@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Navbar from "../components/layout/Navbar";
-import Button from "../components/ui/Button";
 import StatsCards from "../components/dashboard/StatsCards";
 import RecentSessions from "../components/dashboard/RecentSessions";
 import { getStats, getSessions } from "../services/sessionService";
@@ -11,7 +10,40 @@ import {
   RiBookOpenLine,
   RiArrowRightLine,
   RiHandHeartLine,
+  RiImageLine,
+  RiHistoryLine,
 } from "react-icons/ri";
+
+const quickLinks = [
+  {
+    icon: RiCameraLine,
+    title: "Live Interpreter",
+    text: "Open your camera and start real time ASL sign interpretation.",
+    link: "/interpreter",
+    accent: true,
+  },
+  {
+    icon: RiImageLine,
+    title: "Analyze Image",
+    text: "Upload a photo of a hand sign and get instant AI analysis.",
+    link: "/analyze",
+    accent: false,
+  },
+  {
+    icon: RiBookOpenLine,
+    title: "Sign Dictionary",
+    text: "Browse and learn all supported ASL signs with instructions.",
+    link: "/dictionary",
+    accent: false,
+  },
+  {
+    icon: RiHistoryLine,
+    title: "Session History",
+    text: "Review all your past translation sessions and replay them.",
+    link: "/history",
+    accent: false,
+  },
+];
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -59,41 +91,48 @@ export default function Dashboard() {
 
         <StatsCards stats={stats} loading={loadingStats} />
 
-        <div className="grid lg:grid-cols-[1fr_320px] gap-6">
+        <div className="grid lg:grid-cols-[1fr_340px] gap-6">
           <RecentSessions sessions={sessions} loading={loadingSessions} />
 
-          <div className="flex flex-col gap-4">
-            <Link to="/interpreter">
-              <div className="bg-indigo-600/10 border border-indigo-500/20 rounded-2xl p-5 hover:border-indigo-500/40 transition-all group cursor-pointer">
-                <div className="w-10 h-10 bg-indigo-600/20 rounded-xl flex items-center justify-center mb-4">
-                  <RiCameraLine size={18} className="text-indigo-400" />
+          <div className="flex flex-col gap-3">
+            {quickLinks.map((card) => (
+              <Link to={card.link} key={card.title}>
+                <div
+                  className={`rounded-2xl p-5 border transition-all group cursor-pointer ${
+                    card.accent
+                      ? "bg-indigo-600/10 border-indigo-500/20 hover:border-indigo-500/40"
+                      : "bg-white/[0.03] border-white/5 hover:border-indigo-500/20"
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                        card.accent
+                          ? "bg-indigo-600/20"
+                          : "bg-white/[0.06]"
+                      }`}
+                    >
+                      <card.icon
+                        size={18}
+                        className={card.accent ? "text-indigo-400" : "text-gray-300"}
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-white text-sm mb-0.5">
+                        {card.title}
+                      </h3>
+                      <p className="text-xs text-gray-400 line-clamp-1">
+                        {card.text}
+                      </p>
+                    </div>
+                    <RiArrowRightLine
+                      size={16}
+                      className="text-gray-600 group-hover:text-indigo-400 transition-colors flex-shrink-0"
+                    />
+                  </div>
                 </div>
-                <h3 className="font-semibold text-white mb-1">Start Interpreting</h3>
-                <p className="text-sm text-gray-400 mb-4">
-                  Open the live camera interpreter and begin signing.
-                </p>
-                <div className="flex items-center gap-1.5 text-indigo-400 text-sm font-medium group-hover:gap-3 transition-all">
-                  Open Interpreter
-                  <RiArrowRightLine size={14} />
-                </div>
-              </div>
-            </Link>
-
-            <Link to="/dictionary">
-              <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 hover:border-indigo-500/20 transition-all group cursor-pointer">
-                <div className="w-10 h-10 bg-white/[0.06] rounded-xl flex items-center justify-center mb-4">
-                  <RiBookOpenLine size={18} className="text-gray-300" />
-                </div>
-                <h3 className="font-semibold text-white mb-1">Sign Dictionary</h3>
-                <p className="text-sm text-gray-400 mb-4">
-                  Browse and learn all supported ASL signs.
-                </p>
-                <div className="flex items-center gap-1.5 text-indigo-400 text-sm font-medium group-hover:gap-3 transition-all">
-                  Browse Signs
-                  <RiArrowRightLine size={14} />
-                </div>
-              </div>
-            </Link>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
