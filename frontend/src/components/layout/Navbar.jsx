@@ -7,6 +7,7 @@ import { useState } from "react";
 const navLinks = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Interpreter", path: "/interpreter" },
+  { name: "Analyze Image", path: "/analyze" },
   { name: "Dictionary", path: "/dictionary" },
   { name: "History", path: "/history" },
 ];

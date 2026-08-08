@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Interpreter from "./pages/Interpreter";
+import Analyze from "./pages/Analyze";
 import Dictionary from "./pages/Dictionary";
 import History from "./pages/History";
 import SessionDetail from "./pages/SessionDetail";
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/interpreter" element={<ProtectedRoute><Interpreter /></ProtectedRoute>} />
+          <Route path="/analyze" element={<ProtectedRoute><Analyze /></ProtectedRoute>} />
           <Route path="/dictionary" element={<ProtectedRoute><Dictionary /></ProtectedRoute>} />
           <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
           <Route path="/history/:id" element={<ProtectedRoute><SessionDetail /></ProtectedRoute>} />
