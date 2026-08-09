@@ -26,7 +26,6 @@ frontend/dist/
 # ML Models (too large for git)
 backend/app/ml_models/*.h5
 backend/app/ml_models/*.pkl
-backend/app/ml_models/*.tflite
 
 # OS
 .DS_Store
@@ -34,3 +33,5 @@ Thumbs.db
 
 # VS Code
 .vscode/
+
+kaggle.json
