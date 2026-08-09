@@ -1,15 +1,13 @@
 import { useRef, useState } from "react";
 import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
+import api from "../services/api";
 
 export default function useImageDetection() {
   const landmarkerRef = useRef(null);
-  const modelRef = useRef(null);
-  const classesRef = useRef([]);
   const [loading, setLoading] = useState(false);
 
   const init = async () => {
-    if (landmarkerRef.current && modelRef.current) return;
-
+    if (landmarkerRef.current) return;
     const vision = await FilesetResolver.forVisionTasks(
       "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
     );
@@ -21,15 +19,6 @@ export default function useImageDetection() {
       runningMode: "IMAGE",
       numHands: 1,
     });
-
-    const classesRes = await fetch("/models/asl_classes.json");
-    classesRef.current = await classesRes.json();
-
-    const tflite = window.tflite;
-    if (!tflite) throw new Error("TFLite library not loaded");
-
-    tflite.setWasmPath("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/");
-    modelRef.current = await tflite.loadTFLiteModel("/models/asl_model.tflite");
   };
 
   const detectFromImage = async (imageElement) => {
@@ -42,32 +31,14 @@ export default function useImageDetection() {
         return { landmarks: [], gestures: [] };
       }
 
-      const wrist = result.landmarks[0][0];
-      const features = [];
-      for (const lm of result.landmarks[0]) {
-        features.push(lm.x - wrist.x, lm.y - wrist.y, lm.z - wrist.z);
-      }
-
-      const inputTensor = window.tf.tensor2d([features], [1, features.length]);
-      const output = modelRef.current.predict(inputTensor);
-      const probs = output.dataSync();
-      inputTensor.dispose();
-      output.dispose();
-
-      let maxIdx = 0;
-      let maxProb = probs[0];
-      for (let i = 1; i < probs.length; i++) {
-        if (probs[i] > maxProb) {
-          maxProb = probs[i];
-          maxIdx = i;
-        }
-      }
+      const landmarks = result.landmarks[0].map(lm => ({ x: lm.x, y: lm.y, z: lm.z }));
+      const res = await api.post("/predict/sign", { landmarks });
 
       return {
         landmarks: result.landmarks,
         gestures: [[{
-          categoryName: classesRef.current[maxIdx],
-          score: maxProb,
+          categoryName: res.data.sign,
+          score: res.data.confidence,
         }]],
       };
     } catch (err) {
