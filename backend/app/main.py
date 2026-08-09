@@ -6,7 +6,6 @@ from database.connection import connect_db, close_db
 from routes.auth_routes import router as auth_router
 from routes.sign_routes import router as sign_router
 from routes.session_routes import router as session_router
-from routes.image_routes import router as image_router
 from routes.predict_routes import router as predict_router
 from services.prediction_service import load_model
 
@@ -32,7 +31,6 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(sign_router)
 app.include_router(session_router)
-app.include_router(image_router)
 app.include_router(predict_router)
 
 
