@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
-import * as tflite from "@tensorflow/tfjs-tflite";
 
 export default function useHandDetection() {
   const handLandmarkerRef = useRef(null);
@@ -37,6 +36,9 @@ export default function useHandDetection() {
         classesRef.current = classes;
 
         setStatus("Loading ASL model");
+        const tflite = window.tflite;
+        if (!tflite) throw new Error("TFLite library not loaded");
+
         tflite.setWasmPath("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/");
         const model = await tflite.loadTFLiteModel("/models/asl_model.tflite");
 
@@ -45,7 +47,7 @@ export default function useHandDetection() {
 
         setStatus("Ready");
         setReady(true);
-        console.log("Loaded ASL model with", classes.length, "classes");
+        console.log("Loaded ASL model with", classes.length, "classes:", classes);
       } catch (err) {
         console.error("Model load error:", err);
         setStatus("Model failed to load");
@@ -76,7 +78,7 @@ export default function useHandDetection() {
       return { landmarks: [], gestures: [] };
     }
 
-    if (!tfliteModelRef.current) return result;
+    if (!tfliteModelRef.current || !window.tf) return result;
 
     try {
       const features = extractFeatures(result.landmarks[0]);

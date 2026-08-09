@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
-import * as tflite from "@tensorflow/tfjs-tflite";
 
 export default function useImageDetection() {
   const landmarkerRef = useRef(null);
@@ -25,6 +24,9 @@ export default function useImageDetection() {
 
     const classesRes = await fetch("/models/asl_classes.json");
     classesRef.current = await classesRes.json();
+
+    const tflite = window.tflite;
+    if (!tflite) throw new Error("TFLite library not loaded");
 
     tflite.setWasmPath("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-tflite/dist/");
     modelRef.current = await tflite.loadTFLiteModel("/models/asl_model.tflite");
