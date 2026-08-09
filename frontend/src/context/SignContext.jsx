@@ -11,15 +11,7 @@ const SignContext = createContext({
   finalizeWord: () => {},
 });
 
-const GESTURE_MAP = {
-  "Thumb_Up": "THUMB UP",
-  "Thumb_Down": "THUMB DOWN",
-  "Open_Palm": "OPEN PALM",
-  "Closed_Fist": "CLOSED FIST",
-  "Victory": "VICTORY",
-  "Pointing_Up": "POINTING UP",
-  "ILoveYou": "I LOVE YOU",
-};
+const GESTURE_MAP = {};
 
 const IGNORED = ["None", "no_gesture", "", null, undefined];
 
