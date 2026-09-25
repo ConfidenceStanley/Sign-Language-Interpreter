@@ -65,23 +65,23 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-bg text-txt">
       <Navbar />
 
       <div className="pt-28 pb-16 px-6 max-w-7xl mx-auto">
         <div className="mb-10">
-          <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-600 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
             Your Workspace
           </div>
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-indigo-600/15 rounded-2xl flex items-center justify-center flex-shrink-0">
-              <RiHandHeartLine size={22} className="text-indigo-400" />
+              <RiHandHeartLine size={22} className="text-indigo-500" />
             </div>
             <div>
               <h1 className="text-3xl font-bold mb-2">
                 Welcome back, {user?.full_name}
               </h1>
-              <p className="text-gray-400 max-w-2xl">
+              <p className="text-txt-secondary max-w-2xl">
                 Here is an overview of your SignBridge activity. Start a new
                 session or browse your history below.
               </p>
@@ -101,7 +101,7 @@ export default function Dashboard() {
                   className={`rounded-2xl p-5 border transition-all group cursor-pointer ${
                     card.accent
                       ? "bg-indigo-600/10 border-indigo-500/20 hover:border-indigo-500/40"
-                      : "bg-white/[0.03] border-white/5 hover:border-indigo-500/20"
+                      : "bg-surface border-border-subtle hover:border-indigo-500/30"
                   }`}
                 >
                   <div className="flex items-center gap-4">
@@ -109,25 +109,25 @@ export default function Dashboard() {
                       className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
                         card.accent
                           ? "bg-indigo-600/20"
-                          : "bg-white/[0.06]"
+                          : "bg-surface-hover"
                       }`}
                     >
                       <card.icon
                         size={18}
-                        className={card.accent ? "text-indigo-400" : "text-gray-300"}
+                        className={card.accent ? "text-indigo-500" : "text-txt-secondary"}
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-white text-sm mb-0.5">
+                      <h3 className="font-semibold text-txt text-sm mb-0.5">
                         {card.title}
                       </h3>
-                      <p className="text-xs text-gray-400 line-clamp-1">
+                      <p className="text-xs text-txt-secondary line-clamp-1">
                         {card.text}
                       </p>
                     </div>
                     <RiArrowRightLine
                       size={16}
-                      className="text-gray-600 group-hover:text-indigo-400 transition-colors flex-shrink-0"
+                      className="text-txt-muted group-hover:text-indigo-500 transition-colors flex-shrink-0"
                     />
                   </div>
                 </div>

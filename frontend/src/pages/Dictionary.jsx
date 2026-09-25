@@ -71,17 +71,17 @@ export default function Dictionary() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-bg text-txt">
       <Navbar />
 
       <div className="pt-28 pb-16 px-6 max-w-7xl mx-auto">
         <div className="mb-10">
-          <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-600 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
             <RiBookOpenLine size={12} />
             Sign Dictionary
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold mb-3">Learn ASL Signs</h1>
-          <p className="text-gray-400 max-w-2xl">
+          <p className="text-txt-secondary max-w-2xl">
             Browse the complete collection of supported American Sign Language signs.
             Each sign includes detailed instructions on how to perform it correctly.
           </p>
@@ -89,20 +89,20 @@ export default function Dictionary() {
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
           <div className="relative w-full sm:w-80">
-            <RiSearchLine size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+            <RiSearchLine size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-txt-muted" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               placeholder="Search signs"
-              className="w-full bg-white/[0.04] border border-white/10 text-white placeholder-gray-500 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500/50 transition-all"
+              className="w-full bg-surface border border-border text-txt placeholder-txt-muted rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500/50 transition-all"
             />
           </div>
 
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => handleCategoryChange("All")}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === "All" ? "bg-indigo-600 text-white" : "bg-white/[0.04] text-gray-400 hover:text-white border border-white/10 hover:border-white/20"}`}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === "All" ? "bg-indigo-600 text-white" : "bg-surface text-txt-secondary hover:text-txt border border-border hover:border-txt-muted"}`}
             >
               All
             </button>
@@ -110,7 +110,7 @@ export default function Dictionary() {
               <button
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === cat ? "bg-indigo-600 text-white" : "bg-white/[0.04] text-gray-400 hover:text-white border border-white/10 hover:border-white/20"}`}
+                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${activeCategory === cat ? "bg-indigo-600 text-white" : "bg-surface text-txt-secondary hover:text-txt border border-border hover:border-txt-muted"}`}
               >
                 {cat}
               </button>
@@ -120,15 +120,15 @@ export default function Dictionary() {
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <RiLoader4Line size={28} className="animate-spin text-indigo-400" />
+            <RiLoader4Line size={28} className="animate-spin text-indigo-500" />
           </div>
         ) : signs.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-gray-500">No signs found</p>
+            <p className="text-txt-muted">No signs found</p>
           </div>
         ) : (
           <>
-            <p className="text-sm text-gray-500 mb-6">{signs.length} signs found</p>
+            <p className="text-sm text-txt-muted mb-6">{signs.length} signs found</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
               {signs.map((sign) => (
                 <SignCard key={sign.id} sign={sign} onClick={setSelectedSign} />

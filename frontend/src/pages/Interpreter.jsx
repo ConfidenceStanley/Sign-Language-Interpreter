@@ -49,22 +49,21 @@ function InterpreterContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-bg text-txt">
       <Navbar />
       <div className="pt-24 pb-10 px-6 max-w-7xl mx-auto">
-
         <div className="flex items-start justify-between mb-8 flex-wrap gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
+            <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-600 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
               Live Interpreter
             </div>
             <h1 className="text-3xl font-bold mb-2">
               Sign Language Interpreter
             </h1>
-            <p className="text-gray-400 max-w-2xl text-sm">
+            <p className="text-txt-secondary max-w-2xl text-sm">
               Show your hands to the camera and perform ASL signs. The AI
-              detects your gestures and converts them to text and speech
-              in real time.
+              detects your gestures and converts them to text and speech in real
+              time.
             </p>
           </div>
 
@@ -85,7 +84,7 @@ function InterpreterContent() {
             >
               {saved ? (
                 <>
-                  <RiCheckLine size={16} className="text-green-300" />
+                  <RiCheckLine size={16} className="text-green-500" />
                   <span>Session Saved</span>
                 </>
               ) : (
@@ -102,7 +101,6 @@ function InterpreterContent() {
           <CameraView />
           <TranslationPanel />
         </div>
-
       </div>
     </div>
   );

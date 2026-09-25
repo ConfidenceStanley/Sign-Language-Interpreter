@@ -1,1 +1,47 @@
 @import "tailwindcss";
+
+/* ─── Theme Tokens (Tailwind v4) ─── */
+@theme {
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-txt: var(--txt);
+  --color-txt-secondary: var(--txt-secondary);
+  --color-txt-muted: var(--txt-muted);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+}
+
+/* ─── Light Mode (DEFAULT) ─── */
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f9fafb;
+  --surface: #ffffff;
+  --surface-hover: #f3f4f6;
+  --txt: #111827;
+  --txt-secondary: #4b5563;
+  --txt-muted: #9ca3af;
+  --border: #e5e7eb;
+  --border-subtle: #f3f4f6;
+}
+
+/* ─── Dark Mode ─── */
+[data-theme="dark"] {
+  --bg: #0a0a0f;
+  --bg-alt: #111118;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --txt: #ffffff;
+  --txt-secondary: #9ca3af;
+  --txt-muted: #6b7280;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+}
+
+/* ─── Base Styles ─── */
+body {
+  background-color: var(--bg);
+  color: var(--txt);
+  transition: background-color 0.3s, color 0.3s;
+}

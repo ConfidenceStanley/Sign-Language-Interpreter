@@ -46,24 +46,24 @@ export default function CameraView() {
 
   return (
     <div className="w-full">
-      <div className="bg-white/[0.03] border border-white/5 rounded-3xl p-5">
+      <div className="bg-surface border border-border-subtle rounded-3xl p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-white font-semibold text-lg">Live Camera</h3>
-            <p className="text-sm text-gray-400">
+            <h3 className="text-txt font-semibold text-lg">Live Camera</h3>
+            <p className="text-sm text-txt-secondary">
               Position your hands clearly in the frame and sign
             </p>
           </div>
 
           <button
             onClick={() => setCameraOn((prev) => !prev)}
-            className="w-11 h-11 rounded-xl bg-white/[0.05] hover:bg-white/[0.08] border border-white/10 text-white flex items-center justify-center transition-all"
+            className="w-11 h-11 rounded-xl bg-surface-hover hover:bg-surface border border-border text-txt flex items-center justify-center transition-all"
           >
             {cameraOn ? <RiCameraLine size={20} /> : <RiCameraOffLine size={20} />}
           </button>
         </div>
 
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#05070b] border border-white/5">
+        <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-bg-alt border border-border-subtle">
           {cameraOn ? (
             <>
               <Webcam
@@ -76,14 +76,14 @@ export default function CameraView() {
               <LandmarkCanvas landmarks={landmarks} width={960} height={540} />
 
               <div className="absolute top-3 right-3">
-                <div className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium ${handsCount > 0 ? "bg-green-500/15 border border-green-500/20 text-green-400" : "bg-white/5 border border-white/10 text-gray-400"}`}>
-                  <div className={`w-1.5 h-1.5 rounded-full ${handsCount > 0 ? "bg-green-400 animate-pulse" : "bg-gray-500"}`} />
+                <div className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium ${handsCount > 0 ? "bg-green-500/15 border border-green-500/20 text-green-600" : "bg-surface border border-border text-txt-secondary"}`}>
+                  <div className={`w-1.5 h-1.5 rounded-full ${handsCount > 0 ? "bg-green-500 animate-pulse" : "bg-txt-muted"}`} />
                   {handsCount > 0 ? `${handsCount} hand${handsCount > 1 ? "s" : ""} detected` : "No hands detected"}
                 </div>
               </div>
             </>
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-500">
+            <div className="w-full h-full flex items-center justify-center text-txt-muted">
               <div className="flex flex-col items-center gap-3">
                 <RiCameraOffLine size={32} />
                 <p className="text-sm">Camera is off</p>
@@ -93,10 +93,10 @@ export default function CameraView() {
         </div>
 
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <div className="px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5 text-sm text-gray-300 flex items-center gap-2">
+          <div className="px-3 py-2 rounded-xl bg-surface border border-border-subtle text-sm text-txt-secondary flex items-center gap-2">
             {ready
-              ? <RiWifiLine size={16} className="text-green-400" />
-              : <RiLoader4Line size={16} className="animate-spin text-indigo-400" />}
+              ? <RiWifiLine size={16} className="text-green-500" />
+              : <RiLoader4Line size={16} className="animate-spin text-indigo-500" />}
             {ready ? "Model loaded and ready" : "Loading AI model"}
           </div>
         </div>

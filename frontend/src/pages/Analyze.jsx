@@ -124,24 +124,24 @@ function AnalyzeContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-bg text-txt">
       <Navbar />
 
       <div className="pt-24 pb-10 px-6 max-w-7xl mx-auto">
         <div className="mb-8">
           <Link
             to="/interpreter"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-txt-secondary hover:text-txt text-sm mb-6 transition-colors"
           >
             <RiArrowLeftLine size={16} />
             Back to Live Interpreter
           </Link>
 
-          <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-600 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
             Image Analysis
           </div>
           <h1 className="text-3xl font-bold mb-2">Analyze a Sign Image</h1>
-          <p className="text-gray-400 max-w-2xl text-sm">
+          <p className="text-txt-secondary max-w-2xl text-sm">
             Upload a photo of someone performing an ASL sign. The AI will
             detect the hand landmarks and identify the gesture instantly.
           </p>
@@ -149,20 +149,20 @@ function AnalyzeContent() {
 
         <div className="grid lg:grid-cols-[1.3fr_1fr] gap-6 items-start">
           <div className="space-y-4">
-            <div className="bg-white/[0.03] border border-white/5 rounded-3xl p-5">
+            <div className="bg-surface border border-border-subtle rounded-3xl p-5">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-white font-semibold text-lg">
+                  <h3 className="text-txt font-semibold text-lg">
                     Upload Image
                   </h3>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-txt-secondary">
                     JPG, PNG or WEBP up to 10MB
                   </p>
                 </div>
                 {preview && (
                   <button
                     onClick={handleClear}
-                    className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-red-500/10 border border-white/10 hover:border-red-500/20 text-gray-400 hover:text-red-400 flex items-center justify-center transition-all"
+                    className="w-9 h-9 rounded-xl bg-surface-hover hover:bg-red-500/10 border border-border hover:border-red-500/20 text-txt-secondary hover:text-red-500 flex items-center justify-center transition-all"
                   >
                     <RiCloseLine size={18} />
                   </button>
@@ -181,16 +181,16 @@ function AnalyzeContent() {
                   className={`w-full aspect-video rounded-2xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${
                     dragOver
                       ? "border-indigo-500 bg-indigo-500/10"
-                      : "border-white/10 hover:border-indigo-500/40 hover:bg-white/[0.02]"
+                      : "border-border hover:border-indigo-500/40 hover:bg-bg-alt"
                   }`}
                 >
                   <div className="w-16 h-16 bg-indigo-600/15 rounded-2xl flex items-center justify-center mb-4">
-                    <RiUploadCloud2Line size={28} className="text-indigo-400" />
+                    <RiUploadCloud2Line size={28} className="text-indigo-500" />
                   </div>
-                  <p className="text-white font-semibold mb-1">
+                  <p className="text-txt font-semibold mb-1">
                     Drop your image here
                   </p>
-                  <p className="text-sm text-gray-500">or click to browse files</p>
+                  <p className="text-sm text-txt-muted">or click to browse files</p>
 
                   <input
                     ref={fileInputRef}
@@ -201,7 +201,7 @@ function AnalyzeContent() {
                   />
                 </div>
               ) : (
-                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#05070b] border border-white/5">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-bg-alt border border-border-subtle">
                   <img
                     ref={imgRef}
                     src={preview}
@@ -220,20 +220,20 @@ function AnalyzeContent() {
 
                   {result && (
                     <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3">
-                      <div className="text-xs text-gray-400 mb-0.5">
+                      <div className="text-xs text-gray-300 mb-0.5">
                         Detected Sign
                       </div>
                       <div className="text-2xl font-bold text-white">
                         {result.sign}
                       </div>
                       <div className="flex items-center gap-2 mt-1">
-                        <div className="w-16 h-1 bg-white/10 rounded-full overflow-hidden">
+                        <div className="w-16 h-1 bg-white/20 rounded-full overflow-hidden">
                           <div
                             className="h-full bg-indigo-500 rounded-full"
                             style={{ width: `${result.confidence}%` }}
                           />
                         </div>
-                        <span className="text-xs text-indigo-400">
+                        <span className="text-xs text-indigo-300">
                           {result.confidence}%
                         </span>
                       </div>
@@ -243,14 +243,14 @@ function AnalyzeContent() {
               )}
 
               {error && (
-                <div className="mt-4 flex items-start gap-3 bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-xl">
+                <div className="mt-4 flex items-start gap-3 bg-red-500/10 border border-red-500/20 text-red-500 text-sm px-4 py-3 rounded-xl">
                   <RiErrorWarningLine size={18} className="flex-shrink-0 mt-0.5" />
                   <span>{error}</span>
                 </div>
               )}
 
               {result && (
-                <div className="mt-4 flex items-center gap-3 bg-green-500/10 border border-green-500/20 text-green-400 text-sm px-4 py-3 rounded-xl">
+                <div className="mt-4 flex items-center gap-3 bg-green-500/10 border border-green-500/20 text-green-600 text-sm px-4 py-3 rounded-xl">
                   <RiCheckLine size={18} className="flex-shrink-0" />
                   <span>
                     Sign detected and added to your translation panel on the right.
@@ -270,7 +270,7 @@ function AnalyzeContent() {
                   </Button>
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="px-4 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.08] border border-white/10 text-gray-400 hover:text-white text-sm transition-all flex items-center gap-2"
+                    className="px-4 py-2.5 rounded-xl bg-surface-hover hover:bg-surface border border-border text-txt-secondary hover:text-txt text-sm transition-all flex items-center gap-2"
                   >
                     <RiImageLine size={15} />
                     Change
@@ -286,15 +286,15 @@ function AnalyzeContent() {
               )}
             </div>
 
-            <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-5">
+            <div className="bg-surface border border-border-subtle rounded-2xl p-5">
               <div className="flex items-center gap-2.5 mb-4">
-                <RiLightbulbLine size={18} className="text-amber-400" />
-                <h4 className="text-white font-medium">Tips for best results</h4>
+                <RiLightbulbLine size={18} className="text-amber-500" />
+                <h4 className="text-txt font-medium">Tips for best results</h4>
               </div>
               <ul className="space-y-2.5">
                 {tips.map((tip, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-sm text-gray-400">
-                    <span className="w-5 h-5 bg-amber-600/15 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-amber-400 font-medium">
+                  <li key={i} className="flex items-start gap-2.5 text-sm text-txt-secondary">
+                    <span className="w-5 h-5 bg-amber-600/15 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs text-amber-500 font-medium">
                       {i + 1}
                     </span>
                     {tip}

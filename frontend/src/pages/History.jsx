@@ -66,35 +66,35 @@ export default function History() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen bg-bg text-txt">
       <Navbar />
 
       <div className="pt-28 pb-16 px-6 max-w-5xl mx-auto">
         <div className="mb-10">
-          <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-600 text-xs font-medium px-4 py-1.5 rounded-full mb-4">
             <RiHistoryLine size={12} />
             Session History
           </div>
           <h1 className="text-3xl font-bold mb-3">Your Translation History</h1>
-          <p className="text-gray-400">
+          <p className="text-txt-secondary">
             All your past sign language interpretation sessions are saved here.
           </p>
         </div>
 
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <RiLoader4Line size={28} className="animate-spin text-indigo-400" />
+            <RiLoader4Line size={28} className="animate-spin text-indigo-500" />
           </div>
         ) : sessions.length === 0 ? (
-          <div className="text-center py-20 bg-white/[0.02] border border-white/5 rounded-2xl">
-            <RiHistoryLine size={36} className="text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400 font-medium mb-2">No sessions yet</p>
-            <p className="text-gray-600 text-sm mb-6">
+          <div className="text-center py-20 bg-bg-alt border border-border-subtle rounded-2xl">
+            <RiHistoryLine size={36} className="text-txt-muted mx-auto mb-4" />
+            <p className="text-txt-secondary font-medium mb-2">No sessions yet</p>
+            <p className="text-txt-muted text-sm mb-6">
               Complete an interpretation session and save it to see it here.
             </p>
             <button
               onClick={() => navigate("/interpreter")}
-              className="text-indigo-400 text-sm hover:text-indigo-300 transition-colors"
+              className="text-indigo-600 text-sm hover:text-indigo-500 transition-colors"
             >
               Start your first session
             </button>
@@ -105,14 +105,14 @@ export default function History() {
               <div
                 key={session.id}
                 onClick={() => navigate(`/history/${session.id}`)}
-                className="bg-white/[0.03] border border-white/5 rounded-2xl p-6 hover:border-indigo-500/20 transition-all cursor-pointer group"
+                className="bg-surface border border-border-subtle rounded-2xl p-6 hover:border-indigo-500/30 transition-all cursor-pointer group"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
-                    <p className="text-white font-medium mb-3 line-clamp-2 group-hover:text-indigo-300 transition-colors">
+                    <p className="text-txt font-medium mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">
                       {session.translation}
                     </p>
-                    <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500">
+                    <div className="flex flex-wrap items-center gap-4 text-xs text-txt-muted">
                       <span className="flex items-center gap-1.5">
                         <RiTranslate2 size={13} />
                         {session.word_count} words
@@ -127,7 +127,7 @@ export default function History() {
 
                   <button
                     onClick={(e) => handleDelete(e, session.id)}
-                    className="w-9 h-9 rounded-xl bg-white/[0.04] hover:bg-red-500/10 border border-white/10 hover:border-red-500/20 text-gray-500 hover:text-red-400 flex items-center justify-center transition-all flex-shrink-0"
+                    className="w-9 h-9 rounded-xl bg-surface hover:bg-red-500/10 border border-border hover:border-red-500/20 text-txt-muted hover:text-red-500 flex items-center justify-center transition-all flex-shrink-0"
                   >
                     {deletingId === session.id ? (
                       <RiLoader4Line size={15} className="animate-spin" />
@@ -146,17 +146,17 @@ export default function History() {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 text-gray-400 hover:text-white flex items-center justify-center transition-all disabled:opacity-30"
+              className="w-10 h-10 rounded-xl bg-surface border border-border text-txt-secondary hover:text-txt flex items-center justify-center transition-all disabled:opacity-30"
             >
               <RiArrowLeftLine size={16} />
             </button>
-            <span className="text-sm text-gray-400">
+            <span className="text-sm text-txt-secondary">
               Page {page} of {totalPages}
             </span>
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 text-gray-400 hover:text-white flex items-center justify-center transition-all disabled:opacity-30"
+              className="w-10 h-10 rounded-xl bg-surface border border-border text-txt-secondary hover:text-txt flex items-center justify-center transition-all disabled:opacity-30"
             >
               <RiArrowRightLine size={16} />
             </button>
